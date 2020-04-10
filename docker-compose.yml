@@ -4,6 +4,13 @@ services:
     build: .
     volumes:
       - .:/work
-    command: python main.py
+    command: python bitflyer_trades.py
+    logging:
+      driver: gcplogs
+  bitmex-trades:
+    build: .
+    volumes:
+      - .:/work
+    command: python bitmex_trades.py
     logging:
       driver: gcplogs

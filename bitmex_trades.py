@@ -6,7 +6,10 @@ from collector import get_timestamp, listen_forever
 
 def parse(data):
     now = get_timestamp()
-    for e in data["params"]["message"]:
+    if not (data.get("table") == "trade" and data.get("action") == "insert"):
+        return
+    for e in data["data"]:
+        e["side"] = e["side"].lower()
         e["created_at"] = now
         print(json.dumps(e))
 
@@ -15,8 +18,7 @@ async def subscribe(ws):
     await ws.send(
         json.dumps(
             {
-                "method": "subscribe",
-                "params": {"channel": "lightning_executions_FX_BTC_JPY"},
+                "op": "subscribe", "args": "trade:XBTUSD"
             }
         )
     )
@@ -24,6 +26,6 @@ async def subscribe(ws):
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(
-        listen_forever("wss://ws.lightstream.bitflyer.com/json-rpc", subscribe, parse)
+        listen_forever("wss://www.bitmex.com/realtime", subscribe, parse)
     )
     asyncio.get_event_loop().run_forever()
