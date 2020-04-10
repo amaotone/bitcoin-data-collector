@@ -6,7 +6,6 @@ authors = ["amaotone <amane.suzu@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-fluent-logger = "^0.9.6"
 websockets = "^8.1"
 
 [tool.poetry.dev-dependencies]
