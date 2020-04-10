@@ -1,9 +1,9 @@
-version: "3"
+version: "3.3"
 services:
   bitflyer-trades:
     build: .
     volumes:
-      - $PWD:/work
+      - .:/work
     command: python main.py
-logging:
-  driver: gcplogs
+    logging:
+      driver: gcplogs

@@ -12,7 +12,7 @@ def parse(data):
         e["timestamp"] = parse_bitflyer_timestamp(e["exec_date"])
         del e["exec_date"], e["size"]
         e["created_at"] = now
-        print(e)
+        print(json.dumps(e))
 
 
 async def subscribe(ws):
